@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
 from datetime import datetime
@@ -37,6 +37,9 @@ def index():
                     email=email, date=date_object, occupation=occupation)
         db.session.add(form)
         db.session.commit()
+
+        # Success message (jinja 2 in html)
+        flash(f"Thank you {first_name}! Your form was submitted successfully!", "success")
 
     return render_template("index.html")
 
